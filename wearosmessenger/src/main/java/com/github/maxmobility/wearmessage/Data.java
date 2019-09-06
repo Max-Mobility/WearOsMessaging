@@ -24,10 +24,12 @@ public class Data {
     public Data(Context ctx) {
         mContext = ctx;
     }
-    private static Asset toAsset(byte[] item){
+
+    private static Asset toAsset(byte[] item) {
         Asset returnAsset = Asset.createFromBytes(item);
         return returnAsset;
     }
+
     public void sendData(String data) {
         Log.d(TAG, "Data to be sent: " + data);
         PutDataMapRequest dataMap = PutDataMapRequest.create(DATA_PATH);

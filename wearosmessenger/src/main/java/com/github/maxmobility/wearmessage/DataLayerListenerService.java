@@ -16,21 +16,19 @@
 
 package com.github.maxmobility.wearmessage;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.gms.wearable.DataEvent;
 import com.google.android.gms.wearable.DataEventBuffer;
-import com.google.android.gms.wearable.MessageEvent;
-import com.google.android.gms.wearable.Wearable;
-import com.google.android.gms.wearable.WearableListenerService;
 import com.google.android.gms.wearable.DataMap;
 import com.google.android.gms.wearable.DataMapItem;
+import com.google.android.gms.wearable.MessageEvent;
+import com.google.android.gms.wearable.WearableListenerService;
 
-/** Listens to DataItems and Messages from the local node. */
+/**
+ * Listens to DataItems and Messages from the local node.
+ */
 public class DataLayerListenerService extends WearableListenerService {
 
     private static final String TAG = "DataLayerService";
@@ -52,7 +50,7 @@ public class DataLayerListenerService extends WearableListenerService {
             Uri uri = event.getDataItem().getUri();
             String path = uri.getPath();
 
-            DataMap dataMap= DataMapItem.fromDataItem(event.getDataItem()).getDataMap();
+            DataMap dataMap = DataMapItem.fromDataItem(event.getDataItem()).getDataMap();
             if (APP_DATA_PATH.equals(path)) {
                 String value = dataMap.getString(APP_DATA_KEY);
                 Log.d(TAG, "string data : " + value);

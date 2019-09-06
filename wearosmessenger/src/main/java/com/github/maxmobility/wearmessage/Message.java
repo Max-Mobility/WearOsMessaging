@@ -1,19 +1,16 @@
 package com.github.maxmobility.wearmessage;
 
 
-
 import android.content.Context;
-
 import android.os.AsyncTask;
-import androidx.annotation.WorkerThread;
 import android.util.Log;
 
+import androidx.annotation.WorkerThread;
 
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
-import com.google.android.gms.wearable.Wearable;
 import com.google.android.gms.wearable.Node;
-
+import com.google.android.gms.wearable.Wearable;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -32,7 +29,7 @@ public class Message {
         mContext = ctx;
     }
 
-    public void sendMessage(String messagePath, String message){
+    public void sendMessage(String messagePath, String message) {
         mPath = messagePath;
         mMessage = message;
         new StartWearableTask().execute();
@@ -68,7 +65,7 @@ public class Message {
     private void sendStartMessage(String node) {
 
         Task<Integer> sendMessageTask =
-                Wearable.getMessageClient(mContext).sendMessage(node, mPath, mMessage.getBytes() );
+                Wearable.getMessageClient(mContext).sendMessage(node, mPath, mMessage.getBytes());
 
         try {
             // Block on a task and get the result synchronously (because this is on a background
