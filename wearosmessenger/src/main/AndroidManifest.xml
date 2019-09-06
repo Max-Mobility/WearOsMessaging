@@ -2,8 +2,7 @@
     package="com.github.maxmobility.wearosmessenger">
     <application
         android:allowBackup="true"
-        android:label="wearosmessager"
-        android:theme="@android:style/Theme.DeviceDefault">
+        android:label="wearosmessager">
         <service
             android:name="com.github.maxmobility.wearmessage.DataLayerListenerService" >
             <intent-filter>
