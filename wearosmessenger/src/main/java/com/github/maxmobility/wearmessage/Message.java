@@ -35,15 +35,9 @@ public class Message {
         new StartWearableTask().execute();
     }
 
-    public List<com.google.android.gms.wearable.Node> getConnectedNodes() {
-        Task<List<Node>> nodes =
-                Wearable.getNodeClient(mContext).getConnectedNodes();
-        Log.d(TAG, nodes.toString());
-        return nodes.getResult();
-    }
 
     @WorkerThread
-    private Collection<String> getNodes() {
+    public Collection<String> getNodes() {
         HashSet<String> results = new HashSet<>();
 
         Task<List<Node>> nodeListTask =
