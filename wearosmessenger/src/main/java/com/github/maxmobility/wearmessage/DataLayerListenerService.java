@@ -61,6 +61,13 @@ public class DataLayerListenerService extends WearableListenerService {
         }
     }
 
+    private void openApp(String packageName) {
+        Intent i = new Intent();
+        i.setClassName(getApplicationContext(), packageName);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
+    }
+    
     @Override
     public void onMessageReceived(MessageEvent messageEvent) {
         Log.d(TAG, "onMessageReceived: " + messageEvent);
@@ -68,14 +75,23 @@ public class DataLayerListenerService extends WearableListenerService {
         Log.d(TAG, "Message: " + new String(messageEvent.getData()));
 
         String message = new String(messageEvent.getData());
+        String action = "";
+        String data = "";
+
+        String[] parts = message.split(":", 0);
+        
+        if (parts.length != 2) {
+        Log.e(TAG, "Error, bad auth received!");
+        return;
+        }
+        
+        action = parts[0];
+        data = parts[1];
 
         // Check to see if the message is to start an activity or other things
-        switch (message) {
+        switch (action) {
             case START_ACTIVITY_PATH:
-                /* We can use this to start activities.
-                Intent startIntent = new Intent(this, MainActivity.class);
-                startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(startIntent);*/
+                openApp(data)
                 break;
             default:
                 break;
