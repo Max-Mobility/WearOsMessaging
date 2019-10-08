@@ -17,6 +17,7 @@
 package com.github.maxmobility.wearmessage;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.util.Log;
 
@@ -63,10 +64,9 @@ public class DataLayerListenerService extends WearableListenerService {
     }
 
     private void openApp(String packageName) {
-        Intent i = new Intent();
-        i.setClassName(getApplicationContext(), packageName);
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(i);
+        PackageManager pm = getPackageManager();
+        Intent launchIntent = pm.getLaunchIntentForPackage(packageName);
+        startActivity(launchIntent);
     }
     
     @Override
@@ -88,7 +88,8 @@ public class DataLayerListenerService extends WearableListenerService {
         
         action = parts[0];
         data = parts[1];
-
+        Log.d(TAG, "action: " + action);
+        Log.d(TAG, "data: " + data);
         // Check to see if the message is to start an activity or other things
         switch (action) {
             case START_ACTIVITY_PATH:
