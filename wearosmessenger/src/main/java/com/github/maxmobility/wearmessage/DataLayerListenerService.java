@@ -33,7 +33,7 @@ import com.google.android.gms.wearable.WearableListenerService;
  */
 public class DataLayerListenerService extends WearableListenerService {
 
-    private static final String TAG = "DataLayerService";
+    private static final String TAG = "DataLayerServiceL";
 
     private static final String START_ACTIVITY_PATH = "/activity";
     private static final String DATA_ITEM_RECEIVED_PATH = "/data-item-received";
@@ -64,6 +64,7 @@ public class DataLayerListenerService extends WearableListenerService {
     }
 
     private void openApp(String packageName) {
+        Log.d(TAG,"Starting openApp");
         PackageManager pm = getPackageManager();
         Intent launchIntent = pm.getLaunchIntentForPackage(packageName);
         startActivity(launchIntent);
@@ -73,23 +74,21 @@ public class DataLayerListenerService extends WearableListenerService {
     public void onMessageReceived(MessageEvent messageEvent) {
         Log.d(TAG, "onMessageReceived: " + messageEvent);
         Log.d(TAG, "Message Path: " + messageEvent.getData().toString());
-        Log.d(TAG, "Message: " + new String(messageEvent.getData()));
-
         String message = new String(messageEvent.getData());
-        String action = "";
-        String data = "";
+        Log.d(TAG, "Message: " + message);
 
+
+        String action;
+        String data;
+
+        Log.d(TAG,"Splitting message");
         String[] parts = message.split(":", 0);
-        
-        if (parts.length != 2) {
-        Log.e(TAG, "Error, bad auth received!");
-        return;
-        }
-        
+
         action = parts[0];
         data = parts[1];
         Log.d(TAG, "action: " + action);
         Log.d(TAG, "data: " + data);
+
         // Check to see if the message is to start an activity or other things
         switch (action) {
             case START_ACTIVITY_PATH:
