@@ -67,6 +67,7 @@ public class DataLayerListenerService extends WearableListenerService {
         Log.d(TAG,"Starting openApp");
         PackageManager pm = getPackageManager();
         Intent launchIntent = pm.getLaunchIntentForPackage(packageName);
+        launchIntent.addCategory(Intent.CATEGORY_LAUNCHER);
         startActivity(launchIntent);
     }
     
