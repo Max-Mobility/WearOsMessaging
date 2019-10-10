@@ -65,10 +65,10 @@ public class DataLayerListenerService extends WearableListenerService {
 
     private void openApp(String packageName) {
         Log.d(TAG,"Starting openApp");
-        PackageManager pm = getPackageManager();
-        Intent launchIntent = pm.getLaunchIntentForPackage(packageName);
-        launchIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-        startActivity(launchIntent);
+        Intent i = new Intent();
+        i.setClassName(getApplicationContext(), packageName);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
     }
     
     @Override
