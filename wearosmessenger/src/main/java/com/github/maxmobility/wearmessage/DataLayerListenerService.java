@@ -93,6 +93,7 @@ public class DataLayerListenerService extends WearableListenerService {
         // Check to see if the message is to start an activity or other things
         switch (action) {
             case START_ACTIVITY_PATH:
+                Log.d(TAG,"Starting activity");
                 openApp(data);
                 break;
             default:
