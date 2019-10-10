@@ -65,9 +65,10 @@ public class DataLayerListenerService extends WearableListenerService {
 
     private void openApp(String packageName) {
         Log.d(TAG,"Starting openApp");
-        PackageManager pm = getPackageManager();
-        Intent launchIntent = pm.getLaunchIntentForPackage(packageName);
-        startActivity(launchIntent);
+        Intent i = new Intent();
+        i.setClassName(getApplicationContext(), packageName);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
     }
     
     @Override
@@ -92,6 +93,7 @@ public class DataLayerListenerService extends WearableListenerService {
         // Check to see if the message is to start an activity or other things
         switch (action) {
             case START_ACTIVITY_PATH:
+                Log.d(TAG,"Starting activity");
                 openApp(data);
                 break;
             default:
